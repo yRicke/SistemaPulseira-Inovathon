@@ -56,7 +56,11 @@
 
         const response = await fetch("/api/modo/definir/", {
             method: "POST",
-            headers: { "X-CSRFToken": getCsrfToken() },
+            credentials: "same-origin",
+            headers: {
+                "X-CSRFToken": getCsrfToken(),
+                Accept: "application/json",
+            },
             body: formData,
         });
 

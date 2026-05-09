@@ -3,6 +3,7 @@ from threading import Lock
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.utils import timezone
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_http_methods
 
 ALLOWED_MODES = {"normal", "calor", "fadiga", "recuperacao"}
@@ -28,6 +29,7 @@ def solucao(request):
     return render(request, "monitoramento/solucao.html")
 
 
+@ensure_csrf_cookie
 def controle_apresentacao(request):
     return render(
         request,
