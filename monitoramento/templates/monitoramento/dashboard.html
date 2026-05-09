@@ -1,0 +1,115 @@
+{% extends "monitoramento/base.html" %}
+
+{% block title %}Dashboard | AgroCare Pulse{% endblock %}
+
+{% block content %}
+<section class="hero-card">
+    <div>
+        <p class="hero-kicker">Saude Ocupacional no Agro</p>
+        <h2 class="hero-title">{{ nome_solucao }}</h2>
+        <p class="hero-subtitle">{{ subtitulo }}</p>
+    </div>
+    <div class="status-panel">
+        <p class="panel-label">Status Atual</p>
+        <div id="statusBadge" class="status-badge status-safe">Seguro</div>
+        <p id="statusDescription" class="status-description">Condicoes estaveis para continuidade do trabalho.</p>
+    </div>
+</section>
+
+<section class="card remote-card">
+    <h3>Modo Apresentacao</h3>
+    <p class="remote-copy">
+        Controle os cenarios pelo celular em
+        <strong>/controle/</strong>. Modo remoto atual:
+        <span id="remoteModeLabel" class="remote-mode-chip">Normal</span>
+    </p>
+    <a class="nav-link remote-link" href="{% url 'monitoramento:controle' %}">Abrir Tela de Controle</a>
+</section>
+
+<section class="grid two-columns">
+    <article class="card worker-card">
+        <h3>Trabalhador Monitorado</h3>
+        <ul class="worker-list">
+            <li><span>Nome</span><strong>{{ trabalhador.nome }}</strong></li>
+            <li><span>Funcao</span><strong>{{ trabalhador.funcao }}</strong></li>
+            <li><span>Fazenda</span><strong>{{ trabalhador.fazenda }}</strong></li>
+            <li><span>Turno</span><strong>{{ trabalhador.turno }}</strong></li>
+        </ul>
+        <div class="risk-meter">
+            <div class="risk-meter-head">
+                <span>Score Geral de Risco</span>
+                <strong id="riskScore">24</strong>
+            </div>
+            <div class="risk-track">
+                <div id="riskFill" class="risk-fill"></div>
+            </div>
+        </div>
+    </article>
+
+    <article class="card bracelet-card">
+        <h3>Pulseira Inteligente Conectada</h3>
+        <div class="bracelet-visual" aria-hidden="true">
+            <div class="bracelet-core"></div>
+            <div class="bracelet-band"></div>
+            <div class="signal-dot signal-a"></div>
+            <div class="signal-dot signal-b"></div>
+            <div class="signal-dot signal-c"></div>
+        </div>
+        <p class="bracelet-caption">Telemetria ativa com transmissao em tempo real para o centro de monitoramento.</p>
+    </article>
+</section>
+
+<section class="grid indicators-grid">
+    <article class="card indicator">
+        <p>Frequencia Cardiaca</p>
+        <h4><span id="bpmValue">82</span> BPM</h4>
+    </article>
+    <article class="card indicator">
+        <p>Temperatura Corporal</p>
+        <h4><span id="tempValue">36.7</span> C</h4>
+    </article>
+    <article class="card indicator">
+        <p>Indice de Calor</p>
+        <h4><span id="heatValue">29.4</span> C</h4>
+    </article>
+    <article class="card indicator">
+        <p>Exposicao ao Sol</p>
+        <h4><span id="exposureValue">48</span> min</h4>
+    </article>
+    <article class="card indicator">
+        <p>Nivel de Fadiga</p>
+        <h4><span id="fatigueValue">36</span>%</h4>
+    </article>
+    <article class="card indicator">
+        <p>Risco Operacional</p>
+        <h4><span id="riskLabel">Baixo</span></h4>
+    </article>
+</section>
+
+<section class="grid charts-grid">
+    <article class="card chart-card">
+        <h3>Tendencia de BPM</h3>
+        <canvas id="bpmChart"></canvas>
+    </article>
+    <article class="card chart-card">
+        <h3>Tendencia de Temperatura Corporal</h3>
+        <canvas id="tempChart"></canvas>
+    </article>
+    <article class="card chart-card">
+        <h3>Tendencia do Score de Risco</h3>
+        <canvas id="riskChart"></canvas>
+    </article>
+</section>
+
+<section class="card alert-card alert-gap">
+    <h3>Alertas Preventivos</h3>
+    <div id="alertsContainer" class="alerts-container">
+        <div class="alert-item alert-safe">Monitoramento ativo sem desvios criticos.</div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/static/monitoramento/js/dashboard.js"></script>
+{% endblock %}

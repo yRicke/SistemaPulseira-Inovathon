@@ -1,0 +1,34 @@
+{% extends "monitoramento/base.html" %}
+
+{% block title %}Controle Remoto | AgroCare Pulse{% endblock %}
+
+{% block content %}
+<section class="hero-card">
+    <div>
+        <p class="hero-kicker">Controle Remoto de Pitch</p>
+        <h2 class="hero-title">Modo de Apresentacao no Celular</h2>
+        <p class="hero-subtitle">
+            Toque em um cenario para alterar ao vivo o comportamento do dashboard exibido na tela principal.
+        </p>
+    </div>
+    <div class="status-panel">
+        <p class="panel-label">Modo Ativo</p>
+        <div id="controllerStatusBadge" class="status-badge status-safe">Normal</div>
+        <p id="controllerFeedback" class="status-description">Controle conectado e pronto para envio.</p>
+    </div>
+</section>
+
+<section id="controllerApp" class="card mobile-control-card" data-current-mode="{{ modo_atual }}">
+    <h3>Cenarios de Simulacao</h3>
+    <div class="controls controls-mobile">
+        <button class="mode-btn mode-btn-mobile" data-mode="normal">Simular condicao normal</button>
+        <button class="mode-btn mode-btn-mobile" data-mode="calor">Simular aumento de calor</button>
+        <button class="mode-btn mode-btn-mobile" data-mode="fadiga">Simular fadiga extrema</button>
+        <button class="mode-btn mode-btn-mobile" data-mode="recuperacao">Simular recuperacao</button>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/monitoramento/js/controle.js"></script>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AgroCare Pulse{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'monitoramento/css/style.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="risk-safe">
+    <div class="app-shell">
+        <header class="topbar">
+            <div class="brand-wrap">
+                <img src="{% static 'monitoramento/img/logo.png' %}" alt="Logo AgroCare Pulse" class="brand-logo">
+                <div>
+                    <p class="topbar-kicker">MVP Demonstrativo</p>
+                    <h1 class="topbar-title">AgroCare Pulse</h1>
+                </div>
+            </div>
+            <nav class="topbar-nav">
+                <a href="{% url 'monitoramento:dashboard' %}" class="nav-link">Dashboard</a>
+                <a href="{% url 'monitoramento:controle' %}" class="nav-link">Controle Remoto</a>
+                <a href="{% url 'monitoramento:solucao' %}" class="nav-link">Sobre a Solucao</a>
+            </nav>
+        </header>
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+    {% block scripts %}{% endblock %}
+</body>
+</html>
